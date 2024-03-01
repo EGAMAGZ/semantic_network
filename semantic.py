@@ -1,3 +1,4 @@
+import re
 from rich.console import Console
 from rich.table import Table
 from enum import Enum
@@ -14,14 +15,8 @@ class ObjectType(Enum):
 
 
 def main() -> None:
-    # with open("entrada.txt") as file:
-    #     content: str = file.read().replace("\n", "")
-
-    content = """(el agua) [es] (vida). (el agua) [se usa en] (casa).
-(el agua) [se usa en] (la casa), (la escuela) y (la oficina).""".replace(
-        "\n", ""
-    )
-
+    with open("entrada.txt") as file:
+        content: str = file.read().replace("\n", "")
     sentences: list[str] = content.split(".")
 
     objects_table: ObjectsTable = {}
@@ -53,24 +48,8 @@ def main() -> None:
                     total_objects += 1
                     objects_table[total_objects] = current_row
 
-                # print(f"{current_object_type.value}: {current_value}")
-
                 current_object_type = ObjectType.NONE
                 current_value = ""
-
-    print(objects_table)
-
-    """Crea un diccionario donde como key sea el numero de fila, y el value sea la una lista de 3 elementos en el orden O, R, O que represente el tipo de objeto, la relacion y el objeto correspondiente
-    al key del diccionario de objects_table que representa el objeto y la relacion, por ejemplo:
-        #    O  R O
-        1 : 1  2 3       (el agua) [es] (vida)
-        2 : 1  4 5       (el agua) [se usa en] (casa)
-        3 : 1 4 6       (el agua) [se usa en] (la casa)
-        4 : 1 4 7       (el agua) [se usa en] (la escuela)
-        5 : 1 4 8       (el agua) [se usa en] (la oficina
-
-    El diccionario resultante se representa una red semantica
-    """
 
     number_row = 0
     semantic_network: SemanticNetwork = {}
@@ -128,13 +107,17 @@ def print_tables(
     first_table.add_column("Tipo")
 
     for key, value in objects_table.items():
-        first_table.add_row(str(key), str(value[0]), value[1])
+        first_table.add_row(
+            str(key),
+            re.sub(r"[\[\]\(\)]", "", value[0]),
+            value[1],
+        )
 
     console.print(first_table)
 
     second_table = Table(title="Red Semantica")
 
-    second_table.add_column("Indice")
+    second_table.add_column("No.")
     second_table.add_column("Objeto")
     second_table.add_column("Relacion")
     second_table.add_column("Objeto")

@@ -51,6 +51,20 @@ plugins = ["importlib-metadata"]
 windows-terminal = ["colorama (>=0.4.6)"]
 
 [[package]]
+name = "python-mermaid"
+version = "0.1.3"
+description = "A (quite) simple that helps creating on-the-fly Mermaid diagrams"
+optional = false
+python-versions = ">=3.10,<4.0"
+files = [
+    {file = "python_mermaid-0.1.3-py3-none-any.whl", hash = "sha256:7d283d98b21b97feb428593905fb8b35e4cd8dbd038aa3ef1e09118d4a91ea89"},
+    {file = "python_mermaid-0.1.3.tar.gz", hash = "sha256:8c9cd781fdfc8ed958513782a982254037913f3d1d893018691044bafa3bd441"},
+]
+
+[package.dependencies]
+Unidecode = ">=1.3.6,<2.0.0"
+
+[[package]]
 name = "rich"
 version = "13.7.1"
 description = "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal"
@@ -68,7 +82,18 @@ pygments = ">=2.13.0,<3.0.0"
 [package.extras]
 jupyter = ["ipywidgets (>=7.5.1,<9)"]
 
+[[package]]
+name = "unidecode"
+version = "1.3.8"
+description = "ASCII transliterations of Unicode text"
+optional = false
+python-versions = ">=3.5"
+files = [
+    {file = "Unidecode-1.3.8-py3-none-any.whl", hash = "sha256:d130a61ce6696f8148a3bd8fe779c99adeb4b870584eeb9526584e9aa091fd39"},
+    {file = "Unidecode-1.3.8.tar.gz", hash = "sha256:cfdb349d46ed3873ece4586b96aa75258726e2fa8ec21d6f00a591d98806c2f4"},
+]
+
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "50000aa45b6aae2b5fd0af80a858d25eba67522ea6b68867411b0abf9372937c"
+content-hash = "afd64a08268b718c8583e01aa13fcf5d1e9855a79c1663f37318251182af7c7f"

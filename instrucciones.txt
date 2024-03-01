@@ -1,0 +1,12 @@
+
+    """Crea un diccionario donde como key sea el numero de fila, y el value sea la una lista de 3 elementos en el orden O, R, O que represente el tipo de objeto, la relacion y el objeto correspondiente
+    al key del diccionario de objects_table que representa el objeto y la relacion, por ejemplo:
+        #    O  R O
+        1 : 1  2 3       (el agua) [es] (vida)
+        2 : 1  4 5       (el agua) [se usa en] (casa)
+        3 : 1 4 6       (el agua) [se usa en] (la casa)
+        4 : 1 4 7       (el agua) [se usa en] (la escuela)
+        5 : 1 4 8       (el agua) [se usa en] (la oficina
+
+    El diccionario resultante se representa una red semantica
+    """
