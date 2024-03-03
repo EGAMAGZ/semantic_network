@@ -1,7 +1,5 @@
 import re
 from webui import webui
-from rich.console import Console
-from rich.table import Table
 from enum import Enum
 from typing import Literal
 from jinja2 import Environment, FileSystemLoader
@@ -139,39 +137,6 @@ def display_graph(
         ),
     )
     webui.wait()
-
-
-def print_tables(
-    objects_table: ObjectsTable, semantic_network: SemanticNetwork
-) -> None:
-    console = Console()
-
-    first_table = Table(title="Tabla de Objetos")
-    first_table.add_column("Indice")
-    first_table.add_column("Texto")
-    first_table.add_column("Tipo")
-
-    for key, value in objects_table.items():
-        first_table.add_row(
-            str(key),
-            value[0],
-            value[1],
-        )
-
-    console.print(first_table)
-
-    second_table = Table(title="Red Semantica")
-
-    second_table.add_column("No.")
-    second_table.add_column("Objeto")
-    second_table.add_column("Relacion")
-    second_table.add_column("Objeto")
-
-    for key, value in semantic_network.items():
-
-        second_table.add_row(str(key), str(value[0]), str(value[1]), str(value[2]))
-
-    console.print(second_table)
 
 
 if __name__ == "__main__":
