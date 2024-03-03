@@ -55,19 +55,20 @@ def main() -> None:
     number_row = 0
     semantic_network: SemanticNetwork = {}
 
-    temp_row: list[int | None] = [None, None, None]
     keys = list(objects_table.keys())
-    for key, value in objects_table.items():
+    temp_row: list[int | None] = [None, None, None]
+
+    for key, (_, object_type) in objects_table.items():
         current_index = keys.index(key)
 
-        if value[1] == "O":
+        if object_type == "O":
             if temp_row[0] is None:
                 temp_row[0] = key
             else:
                 if temp_row[2] is None:
                     temp_row[2] = key
 
-        if value[1] == "R" and temp_row[1] is None:
+        if object_type == "R" and temp_row[1] is None:
             temp_row[1] = key
 
         if (
@@ -82,11 +83,11 @@ def main() -> None:
                 next_key = keys[current_index + 1]
                 next_element = objects_table.get(next_key)
 
-                if value[1] == "R":
+                if object_type == "R":
                     if next_element[1] == "O":
                         temp_row[2] = None
 
-                if value[1] == "O":
+                if object_type == "O":
                     if next_element[1] == "R":
                         temp_row[1] = None
                         temp_row[2] = None
@@ -94,7 +95,6 @@ def main() -> None:
                     if next_element[1] == "O":
                         temp_row[2] = None
 
-    # print_tables(objects_table, semantic_network)
     display_graph(objects_table, semantic_network)
 
 
@@ -103,22 +103,30 @@ def generate_mermaid(
     semantic_network: SemanticNetwork,
 ) -> str:
     nodes = {
-        key: Node(value[0]) for key, value in objects_table.items() if value[1] == "O"
+        key: Node(text)
+        for key, (text, object_type) in objects_table.items()
+        if object_type == "O"
     }
-    edges = {key: value[0] for key, value in objects_table.items() if value[1] == "R"}
+    edges = {
+        key: text
+        for key, (text, object_type) in objects_table.items()
+        if object_type == "R"
+    }
 
-    list_nodes = [node for node in nodes.values()]
     list_links = [
-        Link(nodes.get(value[0]), nodes.get(value[2]), message=edges.get(value[1]))
-        for value in semantic_network.values()
+        Link(
+            nodes.get(idx_object_1),
+            nodes.get(idx_object_2),
+            message=edges.get(idx_relation),
+        )
+        for idx_object_1, idx_relation, idx_object_2 in semantic_network.values()
     ]
 
-    diagram = MermaidDiagram(
+    return MermaidDiagram(
         title="Diagrama de Clasificacion de Objetos",
         links=list_links,
-        nodes=list_nodes,
+        nodes=list(nodes.values()),
     )
-    return diagram
 
 
 def display_graph(
