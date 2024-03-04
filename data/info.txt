@@ -3,8 +3,11 @@
 (el agua) [se usa en] (lugar).
 (la casa) [es un] (lugar).
 (la escuela) [es un] (lugar).
-(la casa) [hay] (vida).
-(la escuela) [hay] (muerte).
-(el hospital) [es un] (lugar).
+(la oficina) y (el hospital) [es un] (lugar).
 (el hospital) [hay] (muerte).
 (el hospital) [hay] (vida).
+(la persona) [tiene] (vida).
+(la persona) [tiene] (muerte).
+(la persona) [requiere] (el agua).
+(la persona) [vive en] (la casa).
+(la persona) [se divierte] y [aprende en] (la escuela).

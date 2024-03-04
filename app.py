@@ -51,7 +51,7 @@ def main() -> None:
                         words_index[object_3],
                     )
                     number_row += 1
-
+    print(semantic_network)
     register_semantic_csv(semantic_network)
     register_objects_csv(objects_table)
     display_graph(objects_table, semantic_network)

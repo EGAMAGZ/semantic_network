@@ -27,7 +27,10 @@ def main() -> None:
     current_value: str = ""
     current_object_type: ObjectType = ObjectType.NONE
 
+    all_sentences = []
     for sentence in sentences:
+        is_second = False
+        temp_info= [[], [], []]
         clean_sentence = sentence.strip()
 
         for character in clean_sentence:
@@ -49,6 +52,12 @@ def main() -> None:
                     total_objects += 1
                     objects_table[total_objects] = current_row
 
+                if current_object_type == ObjectType.OBJECT:
+                    if is_second:
+                        temp_info[2].append(current_value)
+
+                if current_object_type == ObjectType.RELATION:
+                    is_second = True
                 current_object_type = ObjectType.NONE
                 current_value = ""
 
