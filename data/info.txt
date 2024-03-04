@@ -1,0 +1,10 @@
+(el agua) [es] (vida). 
+(el agua) [se usa en] (la casa), (la escuela), (el hospital) y (la oficina).
+(el agua) [se usa en] (lugar).
+(la casa) [es un] (lugar).
+(la escuela) [es un] (lugar).
+(la casa) [hay] (vida).
+(la escuela) [hay] (muerte).
+(el hospital) [es un] (lugar).
+(el hospital) [hay] (muerte).
+(el hospital) [hay] (vida).
