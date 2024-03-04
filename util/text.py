@@ -4,7 +4,7 @@ from typing import Literal
 type TextInfo = tuple[str, Literal["R", "O"]]
 
 
-def divide_text(sentence: str):
+def divide_text(sentence: str) -> tuple[list[TextInfo], list[TextInfo], list[TextInfo]]:
 
     pattern = r"(?P<grupo1>\(.*?\))\s*(?=\[)(?P<grupo2>\[.*?\])\s*(?P<grupo3>\(.*?\))"
 
@@ -32,7 +32,7 @@ def divide_text(sentence: str):
         )
     )
 
-    return [group_1, group_2, group_3]
+    return (group_1, group_2, group_3)
 
 
 if __name__ == "__main__":
