@@ -1,10 +1,8 @@
 from webui import webui
 from jinja2 import Environment, FileSystemLoader
-from python_mermaid.diagram import Node, Link, MermaidDiagram
-from util.text import TextInfo, divide_text
-
-type SemanticNetwork = dict[int, tuple[int, int, int]]
-type ObjectsTable = dict[int, TextInfo]
+from util.file import register_objects_csv, register_semantic_csv
+from util.mermaid import ObjectsTable, SemanticNetwork, generate_mermaid
+from util.text import divide_text
 
 
 def main() -> None:
@@ -54,39 +52,9 @@ def main() -> None:
                     )
                     number_row += 1
 
+    register_semantic_csv(semantic_network)
+    register_objects_csv(objects_table)
     display_graph(objects_table, semantic_network)
-
-
-def generate_mermaid(
-    objects_table: ObjectsTable,
-    semantic_network: SemanticNetwork,
-) -> str:
-    nodes = {
-        key: Node(text)
-        for key, (text, object_type) in objects_table.items()
-        if object_type == "O"
-    }
-
-    edges = {
-        key: text
-        for key, (text, object_type) in objects_table.items()
-        if object_type == "R"
-    }
-
-    list_links = [
-        Link(
-            nodes.get(idx_object_1),
-            nodes.get(idx_object_2),
-            message=edges.get(idx_relation),
-        )
-        for idx_object_1, idx_relation, idx_object_2 in semantic_network.values()
-    ]
-
-    return MermaidDiagram(
-        title="Diagrama de Clasificacion de Objetos",
-        links=list_links,
-        nodes=list(nodes.values()),
-    )
 
 
 def display_graph(
