@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizacion de Redes Semanticas</title>
+    <link rel="stylesheet" href="https://unpkg.com/neobrutalismcss@latest" />
+</head>
+
+<body>
+    <h1> Red Semantica</h1>
+    <div style="display: flex; flex-direction: column; gap: 1em;">
+        <div class="accordion">
+            <input class="accordion-tab" type="checkbox" id="objectTable" />
+            <label class="accordion-label bg-blue" for="objectTable">Tabla de Objetos</label>
+            <div class="accordion-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Indice</th>
+                            <th>Texto</th>
+                            <th>Tipo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for key, value in objects_table.items() %}
+                        <tr>
+                            <td>{{key}}</td>
+                            <td>{{value[0]}}</td>
+                            <td>{{value[1]}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <input class="accordion-tab" type="checkbox" id="semanticTable" />
+            <label class="accordion-label bg-blue" for="semanticTable">Red Semantica</label>
+            <div class="accordion-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Objeto</th>
+                            <th>Relacion</th>
+                            <th>Objeto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for key, value in semantic_network.items() %}
+                        <tr>
+                            <td>{{key}}</td>
+                            <td>{{value[0]}}</td>
+                            <td>{{value[1]}}</td>
+                            <td>{{value[2]}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <input class="accordion-tab" type="checkbox" id="image" />
+            <label class="accordion-label bg-blue" for="image">Ilustracion de Red Semantica</label>
+            <div class="accordion-content">
+                <pre class="mermaid">
+                    {{mermaid_code}}
+                </pre>
+            </div>
+        </div>
+    </div>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</body>
+
+</html>

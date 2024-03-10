@@ -1,19 +1,38 @@
-id,object,type
-1,el agua,O
-2,es,R
-3,vida,O
-4,se usa en,R
-5,la casa,O
-6,la escuela,O
-7,el hospital,O
-8,la oficina,O
-9,lugar,O
-10,es un,R
-11,hay,R
-12,muerte,O
-13,la persona,O
-14,tiene,R
-15,requiere,R
-16,vive en,R
-17,se divierte,R
-18,aprende en,R
+id,object,type
+
+1,el agua,O
+
+2,es,R
+
+3,vida,O
+
+4,se usa en,R
+
+5,la casa,O
+
+6,la escuela,O
+
+7,el hospital,O
+
+8,la oficina,O
+
+9,lugar,O
+
+10,es un,R
+
+11,hay,R
+
+12,muerte,O
+
+13,la persona,O
+
+14,tiene,R
+
+15,requiere,R
+
+16,vive en,R
+
+17,se divierte,R
+
+18,aprende en,R
+
