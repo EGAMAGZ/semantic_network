@@ -7,17 +7,27 @@
     <title>{% block title %}{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <nav class="navbar bg-primary text-primary-content">
-        <div class="flex-1">
-            <a class="btn btn-ghost text-xl">Redes Semanticas</a>
-        </div>
+        <div class="flex-1"></div>
         <div class="flex-none">
             <ul class="menu menu-horizontal px-1">
                 <li>
-                    <a href="/">Red Semantica</a>
+                    <a href="{{ url_for('root') }}"
+                        class="{% if request.path == url_for('root').path %}active{% endif %}">Inicio</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('semantic_network') }}"
+                        class="{% if request.path == url_for('semantic_network').path %}active{% endif %}">Red
+                        Semantica</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('family_tree') }}"
+                        class="{% if request.path == url_for('family_tree').path %}active{% endif %}">Arbol
+                        Genealogico</a>
                 </li>
             </ul>
 

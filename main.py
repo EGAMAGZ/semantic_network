@@ -1,7 +1,8 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
 
 
 app = FastAPI()
@@ -9,6 +10,18 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
+
+
+class SemanticText(BaseModel):
+    semantic_text: str
+
+
+@app.post("/api/semantic_network", response_class=HTMLResponse)
+def api_semantic_network(request: Request, semantic_text: SemanticText):
+    print(semantic_text)
+    return templates.TemplateResponse(
+        request=request, name="fragments/semantic_network.html"
+    )
 
 
 @app.get("/family-tree", response_class=HTMLResponse)

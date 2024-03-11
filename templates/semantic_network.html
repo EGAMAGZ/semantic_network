@@ -3,6 +3,38 @@
 {% block title %}Red Semantica{% endblock %}
 
 {% block content %}
-{{ request.path }}
+<div class="container mx-auto flex flex-col gap-4">
+    <h1 class="text-4xl font-bold mt-8">Red Semantica</h1>
+    <div role="tablist" class="tabs tabs-lifted">
+        <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Tab 1" checked />
+        <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
+            <form hx-post="/api/semantic_network" hx-target="#semantic_network" hx-swap="outerHTML">
+                <label class="form-control">
+                    <div class="label">
+                        <span class="label-text font-semibold">Texto a analizar:</span>
+                    </div>
+                    <textarea class="textarea textarea-bordered h-24" placeholder="Escribe aqui el texto..."
+                        name="semantic_text"></textarea>
+                </label>
+                <button class="btn btn-primary mt-4">Generar Red</button>
+            </form>
+        </div>
+
+        <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Tab 2" />
+        <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
+            <label class="form-control">
+                <div class="label">
+                    <span class="label-text font-semibold">Selecciona un archivo:</span>
+                </div>
+                <input type="file" class="file-input file-input-bordered" accept="text/plain" />
+            </label>
+            <button class="btn btn-primary mt-4">Generar Red</button>
+        </div>
+    </div>
+
+    <div id="semantic_network">
+
+    </div>
+</div>
 
 {% endblock %}
