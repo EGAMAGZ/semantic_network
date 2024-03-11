@@ -35,21 +35,31 @@ def divide_text(sentence: str) -> tuple[list[TextInfo], list[TextInfo], list[Tex
     return (group_1, group_2, group_3)
 
 
+def to_prolog_syntax(text: str) -> str:
+    return text.lower().replace(" ", "_")
+
+
+def to_prolog_instance(
+    relation: TextInfo, object_1: TextInfo, object_2: TextInfo
+) -> str:
+    return f"{to_prolog_syntax(relation[0])}({to_prolog_syntax(object_1[0])},{to_prolog_syntax(object_2[0])})."
+
+
 if __name__ == "__main__":
     text = "(el agua) y (el jabon) [se usan en] y [se encuentran en] (la casa), (la escuela) y (la oficina)."
     groups = divide_text(text)
 
-    assert groups == [
-        [("(el agua)", "O"), ("(el jabon)", "O")],
-        [("[se usan en]", "R"), ("[se encuentran en]", "R")],
-        [("(la casa)", "O"), ("(la escuela)", "O"), ("(la oficina)", "O")],
-    ]
+    assert groups == (
+        [("el agua", "O"), ("el jabon", "O")],
+        [("se usan en", "R"), ("se encuentran en", "R")],
+        [("la casa", "O"), ("la escuela", "O"), ("la oficina", "O")],
+    )
 
     text = "(Gamaliel) [juegan] y [se divierte] (la casa)"
     groups = divide_text(text)
 
-    assert groups == [
-        [("(Gamaliel)", "O")],
-        [("[juegan]", "R"), ("[se divierte]", "R")],
-        [("(la casa)", "O")],
-    ]
+    assert groups == (
+        [("Gamaliel", "O")],
+        [("juegan", "R"), ("se divierte", "R")],
+        [("la casa", "O")],
+    )

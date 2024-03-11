@@ -1,7 +1,7 @@
 from ui import display_graph
 from util.file import register_objects_csv, register_semantic_csv
 from util.mermaid import ObjectsTable, SemanticNetwork
-from util.text import divide_text
+from util.text import TextInfo, divide_text
 
 
 def main() -> None:
@@ -15,7 +15,7 @@ def main() -> None:
     number_row = 0
     semantic_network: SemanticNetwork = {}
 
-    words_index: dict[str, int] = {}
+    words_index: dict[TextInfo, int] = {}
 
     for sentence in sentences:
         if not sentence:

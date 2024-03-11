@@ -1,0 +1,7 @@
+(aldaberto) es [padre] de (eduardo).
+(eduardo) es [padre] de (gamaliel) y (emmanuel).
+(juan) es [padre] de (maribel), (esmeralda) y (ricardo).
+
+(sara) es [madre] de (eduardo).
+(agustina) es [madre] de (maribel), (esmeralda) y (ricardo).
+(maribel) es [madre] de (gamaliel) y (emmanuel).
