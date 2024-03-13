@@ -8,7 +8,7 @@
     <input class="accordion-tab" type="checkbox" id="form" checked />
     <label class="accordion-label bg-blue" for="form">Texto</label>
     <div class="accordion-content">
-        <form hx-get="/api/semantic_network" hx-target="#response-div" hx-swap="outerHTML" hx-target-5*="#errors">
+        <form hx-get="/api/semantic_network" hx-target="#response-div" hx-swap="innerHTML" hx-target-5*="#errors">
             <div style="display: flex; flex-direction: column; gap: 8px;">
                 <span style="font-weight: 600;">Texto a analizar:</span>
                 <textarea class="nb-input default" style="width: 100%; text-align: start !important; height: 8em;"
@@ -19,10 +19,6 @@
     </div>
 </div>
 
-<div id="response-div"></div>
-
-<div id="errors">
-
-</div>
+<div id="response-div" style="display: flex; flex-direction: column; gap: 1em;"></div>
 
 {% endblock %}
