@@ -1,11 +1,8 @@
 import re
 from typing import Literal
-import matplotlib.pyplot as plt
-import networkx as nx
 from ui import display_graph
 
 from util.mermaid import ObjectsTable, SemanticNetwork
-from util.text import TextInfo
 
 
 def main() -> None:

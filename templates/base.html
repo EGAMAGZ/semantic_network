@@ -5,35 +5,35 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/neobrutalismcss@latest" />
+    <script src="https://unpkg.com/htmx.org@1.9.10"
+        integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+        crossorigin="anonymous"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
+    <style>
+        .as {
+            box-sizing: border-box;
+            font-family: Proza Libre, sans-serif;
+            border: 3px solid #000000;
+            display: flex;
+            /* height: 85vh; */
+            border-radius: 1.5rem;
+            background-color: #ffc0cb;
+            /* justify-content: center;
+            align-items: center; */
+            flex-direction: column;
+            padding: 5%;
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body>
-    <nav class="navbar bg-primary text-primary-content">
-        <div class="flex-1"></div>
-        <div class="flex-none">
-            <ul class="menu menu-horizontal px-1">
-                <li>
-                    <a href="{{ url_for('root') }}"
-                        class="{% if request.path == url_for('root').path %}active{% endif %}">Inicio</a>
-                </li>
-                <li>
-                    <a href="{{ url_for('semantic_network') }}"
-                        class="{% if request.path == url_for('semantic_network').path %}active{% endif %}">Red
-                        Semantica</a>
-                </li>
-                <li>
-                    <a href="{{ url_for('family_tree') }}"
-                        class="{% if request.path == url_for('family_tree').path %}active{% endif %}">Arbol
-                        Genealogico</a>
-                </li>
-            </ul>
-
-        </div>
-    </nav>
-    {% block content %}{% endblock %}
+    <div style="display: flex; flex-direction: column; gap: 1em;">
+        {% block content %}{% endblock %}
+        {% include "menu.html" %}
+    </div>
 </body>
 
 </html>

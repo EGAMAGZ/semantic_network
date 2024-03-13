@@ -1,0 +1,45 @@
+<div>
+    <h2>Menu</h>
+        <div style="display: flex; flex-direction: row; gap: 1em;">
+            {% if request.path != url_for('semantic_network').path %}
+            <div class="card">
+                <a href="{{ url_for('semantic_network') }}">
+                    <div class="card-thumbnail">
+                        <img src="https://i.stack.imgur.com/NzH6t.png" loading="lazy" alt="Explore NeoBrutalismCSS"
+                            class="card-thumbnail" />
+                    </div>
+                    <div class="card-content">
+                        <p>
+                            <strong>Red Semantica</strong>
+                        </p>
+                        <p>
+                            Generar una red semantica a partir de un texto, para visualizar su tabla de objetos y red
+                            semantica
+                        </p>
+                        <p><strong>Visitar</strong></p>
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+
+            {% if request.path != url_for('family_tree').path %}
+            <div class="card">
+                <a href="{{ url_for('family_tree') }}">
+                    <div class="card-thumbnail">
+                        <img src="https://www.pro-corp.net/wp-content/uploads/2021/10/12.-Feb-Tipos-de-arbol-genealogico-%C2%BFcuales-hay-y-como-decidir-cual-es-el-mas-conveniente-segun-la-informacion-que-tienes-scaled-1.webp"
+                            loading="lazy" alt="Explore NeoBrutalismCSS" class="card-thumbnail" />
+                    </div>
+                    <div class="card-content">
+                        <div class="text-small">October 8, 2023</div>
+                        <p>
+                            <strong>Arbol genealogico</strong>
+                        </p>
+                        <p>Generar un arbol genealogico a partir de un texto.</p>
+                        <p><strong>Visitar -></strong></p>
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+        </div>
+
+</div>

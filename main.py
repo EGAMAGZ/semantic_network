@@ -1,8 +1,9 @@
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+
+from generator import SemanticNetworkGenerator
 
 
 app = FastAPI()
@@ -12,15 +13,19 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 
-class SemanticText(BaseModel):
-    semantic_text: str
+@app.get("/api/semantic_network", response_class=HTMLResponse)
+def api_semantic_network(request: Request, semantic_text: str):
+    generator = SemanticNetworkGenerator(semantic_text)
+    generator.generate()
 
-
-@app.post("/api/semantic_network", response_class=HTMLResponse)
-def api_semantic_network(request: Request, semantic_text: SemanticText):
-    print(semantic_text)
     return templates.TemplateResponse(
-        request=request, name="fragments/semantic_network.html"
+        request=request,
+        name="fragments/semantic_network.html",
+        context={
+            "mermaid_code": generator.generated_code,
+            "objects_table": generator.objects_table,
+            "semantic_network": generator.semantic_network,
+        },
     )
 
 
@@ -34,9 +39,9 @@ def semantic_network(request: Request):
     return templates.TemplateResponse(request=request, name="semantic_network.html")
 
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/", response_class=RedirectResponse)
 async def root(request: Request):
-    return templates.TemplateResponse(request=request, name="index.html")
+    return RedirectResponse("/semantic-network")
 
 
 if __name__ == "__main__":
