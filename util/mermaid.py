@@ -32,7 +32,7 @@ def generate_mermaid(
         for idx_object_1, idx_relation, idx_object_2 in semantic_network.values()
     ]
 
-    return MermaidDiagram(
+    return str(MermaidDiagram(
         links=list_links,
         nodes=list(nodes.values()),
-    )
+    ))

@@ -7,7 +7,7 @@ def display_graph(
     objects_table: ObjectsTable, semantic_network: SemanticNetwork
 ) -> None:
     env = Environment(loader=FileSystemLoader("templates"))
-    template = env.get_template("a.html")
+    template = env.get_template("views/a.html")
 
     mermaid_code = generate_mermaid(objects_table, semantic_network)
     web_window = webui.window()

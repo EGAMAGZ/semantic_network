@@ -5,7 +5,6 @@ type TextInfo = tuple[str, Literal["R", "O"]]
 
 
 def divide_text(sentence: str) -> tuple[list[TextInfo], list[TextInfo], list[TextInfo]]:
-
     pattern = r"(?P<grupo1>\(.*?\))\s*(?=\[)(?P<grupo2>\[.*?\])\s*(?P<grupo3>\(.*?\))"
 
     coincidences = re.search(pattern, sentence)
@@ -27,20 +26,20 @@ def divide_text(sentence: str) -> tuple[list[TextInfo], list[TextInfo], list[Tex
             lambda text: (re.sub(r"[\(\)]", "", text), "O"),
             re.findall(
                 r"\(.*?\)",
-                coincidences.group("grupo3") + sentence[coincidences.end() :],
+                coincidences.group("grupo3") + sentence[coincidences.end():],
             ),
         )
     )
 
-    return (group_1, group_2, group_3)
+    return group_1, group_2, group_3
 
 
-def to_prolog_syntax(text: str) -> str:
-    return text.lower().replace(" ", "_")
+def to_prolog_syntax(plain_text: str) -> str:
+    return plain_text.lower().replace(" ", "_")
 
 
 def to_prolog_instance(
-    relation: TextInfo, object_1: TextInfo, object_2: TextInfo
+        relation: TextInfo, object_1: TextInfo, object_2: TextInfo
 ) -> str:
     return f"{to_prolog_syntax(relation[0])}({to_prolog_syntax(object_1[0])},{to_prolog_syntax(object_2[0])})."
 

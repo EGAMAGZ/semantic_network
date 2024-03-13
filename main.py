@@ -51,17 +51,17 @@ def api_family_tree(request: Request, semantic_text: str):
 def family_tree(request: Request):
     return templates.TemplateResponse(
         request=request,
-        name="family_tree.html",
+        name="views/family_tree.html",
     )
 
 
 @app.get("/semantic-network", response_class=HTMLResponse)
 def semantic_network(request: Request):
-    return templates.TemplateResponse(request=request, name="semantic_network.html")
+    return templates.TemplateResponse(request=request, name="views/semantic_network.html")
 
 
 @app.get("/", response_class=RedirectResponse)
-async def root(request: Request):
+async def root(_request: Request):
     return RedirectResponse("/semantic-network")
 
 

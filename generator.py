@@ -3,10 +3,10 @@ import re
 from typing import Literal, override
 
 from util.mermaid import ObjectsTable, SemanticNetwork, generate_mermaid
-from util.text import TextInfo, divide_text, to_prolog_instance, to_prolog_syntax
+from util.text import TextInfo, divide_text, to_prolog_instance
 
 
-class AbtractGenerator(ABC):
+class AbstractGenerator(ABC):
     _generated_code: str
     _semantic_network: SemanticNetwork
     _objects_table: ObjectsTable
@@ -48,7 +48,7 @@ class AbtractGenerator(ABC):
         self._objects_table = objects_table
 
 
-class SemanticNetworkGenerator(AbtractGenerator):
+class SemanticNetworkGenerator(AbstractGenerator):
 
     def __init__(self, text: str) -> None:
         super().__init__()
@@ -106,7 +106,7 @@ class SemanticNetworkGenerator(AbtractGenerator):
         self.mermaid_code = generate_mermaid(objects_table, semantic_network)
 
 
-class FamilyTreeGenerator(AbtractGenerator):
+class FamilyTreeGenerator(AbstractGenerator):
     _text: str
 
     def __init__(self, text: str) -> None:
@@ -126,10 +126,6 @@ class FamilyTreeGenerator(AbtractGenerator):
             "hombre": set(),
             "mujer": set(),
         }
-
-        group_1: list[str] = []
-        group_2: list[str] = []
-        group_3: list[str] = []
 
         for sentence in sentences:
             if not sentence:
