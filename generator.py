@@ -3,7 +3,7 @@ import re
 from typing import Literal, override
 
 from util.mermaid import ObjectsTable, SemanticNetwork, generate_mermaid
-from util.text import TextInfo, divide_text, to_prolog_instance
+from util.text import TextInfo, divide_text, to_prolog_instance, to_prolog_syntax
 
 
 class AbtractGenerator(ABC):
@@ -212,7 +212,7 @@ class FamilyTreeGenerator(AbtractGenerator):
                 relation=objects_table[relation],
             )
             for object_1, relation, object_2 in semantic_network.values()
-            if relation == "es"
+            if objects_table[relation][0] != "es"
         ]
 
         list_instances.extend(
