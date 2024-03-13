@@ -3,8 +3,8 @@
 <div class="accordion">
     <input class="accordion-tab" type="checkbox" id="prolog" />
     <label class="accordion-label bg-blue" for="prolog">Prolog</label>
-    <div class="accordion-content">
-        <code>
+    <div class="accordion-content" style="padding: 0 1em; max-height: none;">
+        <code id="code">
             {{ code }}
         </code>
     </div>
@@ -15,5 +15,15 @@
     mermaid.initialize({ startOnLoad: true, theme: "forest" });
     await mermaid.run({
         nodes: [document.getElementById("mermaid")]
-    })
+    });
+</script>
+
+<script type="module">
+    import { codeToHtml } from 'https://esm.sh/shiki@1.0.0'
+
+    const codeElement = document.getElementById("code");
+    codeElement.innerHTML = await codeToHtml(codeElement.innerHTML, {
+        lang: "prolog",
+        theme: "rose-pine"
+    });
 </script>

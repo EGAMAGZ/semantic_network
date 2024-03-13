@@ -225,6 +225,7 @@ class FamilyTreeGenerator(AbtractGenerator):
 
         instances_text = "\n".join(list_instances)
         return f"""{instances_text}
+
 sibling(X, Y) :-
     padre(Z, X),
     padre(Z, Y),
