@@ -33,7 +33,6 @@ def generate_mermaid(
     ]
 
     return MermaidDiagram(
-        title="Diagrama de Clasificacion de Objetos",
         links=list_links,
         nodes=list(nodes.values()),
     )

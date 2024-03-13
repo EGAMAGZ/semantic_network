@@ -55,8 +55,18 @@
     <label class="accordion-label bg-blue" for="image">Ilustracion de Red Semantica</label>
     <div class="accordion-content">
         <pre class="mermaid" id="mermaid">
-            {{mermaid_code}}
+            {{mermaid_code | safe}}
         </pre>
+    </div>
+</div>
+
+<div class="accordion">
+    <input class="accordion-tab" type="checkbox" id="prolog" />
+    <label class="accordion-label bg-blue" for="prolog">Prolog</label>
+    <div class="accordion-content">
+        <code>
+            {{ code }}
+        </code>
     </div>
 </div>
 
