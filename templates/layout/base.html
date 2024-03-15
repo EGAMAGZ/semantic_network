@@ -16,7 +16,9 @@
 <body>
     <div style="display: flex; flex-direction: column; gap: 1em;">
         {% block content %}{% endblock %}
+        {% if request.path != "/" %}
         {% include "components/menu.html" %}
+        {% endif %}
     </div>
 </body>
 
