@@ -1,3 +1,4 @@
+from jinja2 import Environment, FileSystemLoader
 from util.text import TextInfo
 from util.type import SemanticNetwork, ObjectsTable
 
@@ -19,6 +20,9 @@ def to_prolog_instance(
 def generate_prolog_code(
         semantic_network: SemanticNetwork, objects_table: ObjectsTable
 ) -> str:
+    env = Environment(loader=FileSystemLoader("templates"))
+    template = env.get_template("prolog/family.pl")
+
     list_instances = [
         to_prolog_instance(
             object_1=objects_table[object_1],
@@ -29,31 +33,4 @@ def generate_prolog_code(
     ]
 
     instances_text = "\n".join(list_instances)
-    return f"""{instances_text}
-
-hermano(X, Y) :-
-    padre(Z, X),
-    padre(Z, Y),
-    madre(W, X),
-    madre(W, Y),
-    X \= Y.
-
-tio(X, Y) :-
-    hermano(X, Z),
-    (padre(Z, Y); madre(Z, Y)).
-
-abuelo(X,Y):-
-    madre(X, Z),
-    madre(Z, Y);
-    madre(X, Z),
-    padre(Z, Y);
-    padre(X, Z),
-    madre(Z, Y);
-    padre(X, Z),
-    padre(Z, Y).
-
-primo(X, Y) :-
-    abuelo(Z, X),
-    abuelo(Z, Y),
-    X \= Y,
-    not(hermano(X, Y))."""
+    return template.render(instances=instances_text)
