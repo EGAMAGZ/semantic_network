@@ -1,7 +1,6 @@
 import re
-from typing import Literal
 
-type TextInfo = tuple[str, Literal["R", "O"]]
+from util.type import TextInfo
 
 
 def divide_text(sentence: str) -> tuple[list[TextInfo], list[TextInfo], list[TextInfo]]:
@@ -26,7 +25,7 @@ def divide_text(sentence: str) -> tuple[list[TextInfo], list[TextInfo], list[Tex
             lambda text: (re.sub(r"[\(\)]", "", text), "O"),
             re.findall(
                 r"\(.*?\)",
-                coincidences.group("grupo3") + sentence[coincidences.end():],
+                coincidences.group("grupo3") + sentence[coincidences.end() :],
             ),
         )
     )
@@ -34,14 +33,8 @@ def divide_text(sentence: str) -> tuple[list[TextInfo], list[TextInfo], list[Tex
     return group_1, group_2, group_3
 
 
-def to_prolog_syntax(plain_text: str) -> str:
-    return plain_text.lower().replace(" ", "_")
-
-
-def to_prolog_instance(
-        relation: TextInfo, object_1: TextInfo, object_2: TextInfo
-) -> str:
-    return f"{to_prolog_syntax(relation[0])}({to_prolog_syntax(object_1[0])},{to_prolog_syntax(object_2[0])})."
+def get_plain_text(text: str) -> str:
+    return re.sub(r"[\[\]\(\)]", "", text)
 
 
 if __name__ == "__main__":
@@ -62,3 +55,6 @@ if __name__ == "__main__":
         [("juegan", "R"), ("se divierte", "R")],
         [("la casa", "O")],
     )
+
+    text = "(el agua) [es] (vida)."
+    assert get_plain_text(text) == "el agua es vida"

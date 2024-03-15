@@ -4,8 +4,8 @@ from util.type import TextInfo
 
 
 def generate_mermaid(
-    objects_table: dict[int, TextInfo],
-    semantic_network: dict[int, tuple[int, int, int]],
+        objects_table: dict[int, TextInfo],
+        semantic_network: dict[int, tuple[int, int, int]],
 ) -> str:
     nodes = {
         key: Node(text)

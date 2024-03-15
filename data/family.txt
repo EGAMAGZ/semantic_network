@@ -1,19 +1,9 @@
 (aldaberto) es [padre] de (eduardo).
 (eduardo) es [padre] de (gamaliel) y (emmanuel).
 (juan) es [padre] de (maribel), (esmeralda) y (ricardo).
+(fernando) es [padre] (jesenia), (rosalba) y (picos).
 
 (sara) es [madre] de (eduardo).
 (agustina) es [madre] de (maribel), (esmeralda) y (ricardo).
 (maribel) es [madre] de (gamaliel) y (emmanuel).
-
-(aldaberto) [es] (hombre).
-(eduardo) [es] (hombre).
-(gamaliel) [es] (hombre).
-(emmanuel) [es] (hombre).
-(juan) [es] (hombre).
-(ricardo) [es] (hombre).
-
-(maribel) [es] (mujer).
-(esmeralda) [es] (mujer).
-(sara) [es] (mujer).
-(agustina) [es] (mujer).
+(esmeralda) es [madre] de (jesenia), (rosalba) y (picos).

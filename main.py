@@ -5,7 +5,6 @@ from fastapi.staticfiles import StaticFiles
 
 from generator import FamilyTreeGenerator, SemanticNetworkGenerator
 
-
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")

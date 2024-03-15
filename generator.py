@@ -2,8 +2,10 @@ from abc import ABC, abstractmethod
 import re
 from typing import Literal, override
 
-from util.mermaid import ObjectsTable, SemanticNetwork, generate_mermaid
-from util.text import TextInfo, divide_text, to_prolog_instance
+from transpiler.prolog import generate_prolog_code
+from util.mermaid import generate_mermaid
+from util.text import TextInfo, divide_text
+from util.type import SemanticNetwork, ObjectsTable
 
 
 class AbstractGenerator(ABC):
@@ -122,10 +124,6 @@ class FamilyTreeGenerator(AbstractGenerator):
         object_table: ObjectsTable = {}
         words_index: dict[str, int] = {}
         semantic_network: SemanticNetwork = {}
-        genres_table: dict[Literal["hombre", "mujer"], set[str]] = {
-            "hombre": set(),
-            "mujer": set(),
-        }
 
         for sentence in sentences:
             if not sentence:
@@ -185,76 +183,8 @@ class FamilyTreeGenerator(AbstractGenerator):
                             words_index[relation],
                             words_index[object_2],
                         )
-                        if relation == "es":
-                            genres_table[object_2].add(object_1)
 
         self.semantic_network = semantic_network
         self.objects_table = object_table
         self.mermaid_code = generate_mermaid(object_table, semantic_network)
-        self.generated_code = self._generate_prolog_code(
-            semantic_network, object_table, genres_table
-        )
-
-    def _generate_prolog_code(
-        self,
-        semantic_network: SemanticNetwork,
-        objects_table: ObjectsTable,
-        genres_table: dict[str, set[str]],
-    ) -> str:
-        list_instances = [
-            to_prolog_instance(
-                object_1=objects_table[object_1],
-                object_2=objects_table[object_2],
-                relation=objects_table[relation],
-            )
-            for object_1, relation, object_2 in semantic_network.values()
-            if objects_table[relation][0] != "es"
-        ]
-
-        list_instances.extend(
-            [
-                f"{genre}({name})."
-                for genre, names in genres_table.items()
-                for name in names
-            ]
-        )
-
-        instances_text = "\n".join(list_instances)
-        return f"""{instances_text}
-
-sibling(X, Y) :-
-    padre(Z, X),
-    padre(Z, Y),
-    madre(W, X),
-    madre(W, Y),
-    X \= Y.
-
-hermano(X,Y):-
-    sibling(X,Y),
-    hombre(X).
-
-hermana(X,Y) :-
-    sibling(X,Y),
-    mujer(X).
-
-gran(X,Y):-
-    madre(X, Z),
-    madre(Z, Y);
-
-    madre(X, Z),
-    padre(Z, Y);
-
-    padre(X, Z),
-    madre(Z, Y);
-
-    padre(X, Z),
-    padre(Z, Y).
-
-abuelo(X, Y) :-
-    gran(X,Y),
-    hombre(X).
-
-abuela(X, Y) :-
-    gran(X,Y),
-    mujer(X).
-"""
+        self.generated_code = generate_prolog_code(semantic_network, object_table)
