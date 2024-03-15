@@ -1,3 +1,5 @@
+% Hechos que definen las relaciones padre y madre
+
 {{instances}}
 
 % Regla que define la relación de hermano entre dos personas
