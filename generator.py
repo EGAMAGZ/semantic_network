@@ -3,7 +3,7 @@ import re
 from typing import Literal, override
 
 from transpiler.prolog import generate_prolog_code
-from util.mermaid import generate_mermaid
+from transpiler.mermaid import generate_mermaid
 from util.text import TextInfo, divide_text
 from util.type import SemanticNetwork, ObjectsTable
 

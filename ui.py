@@ -1,10 +1,12 @@
 from webui import webui
 from jinja2 import Environment, FileSystemLoader
-from util.mermaid import ObjectsTable, SemanticNetwork, generate_mermaid
+
+from transpiler.mermaid import generate_mermaid
+from util.type import ObjectsTable, SemanticNetwork
 
 
 def display_graph(
-    objects_table: ObjectsTable, semantic_network: SemanticNetwork
+        objects_table: ObjectsTable, semantic_network: SemanticNetwork
 ) -> None:
     env = Environment(loader=FileSystemLoader("templates"))
     template = env.get_template("views/a.html")

@@ -1,5 +1,5 @@
 import csv
-from util.mermaid import ObjectsTable, SemanticNetwork
+from util.type import ObjectsTable, SemanticNetwork
 
 
 def register_semantic_csv(content: SemanticNetwork) -> None:

@@ -3,11 +3,10 @@ from util.file import (
     get_objects_table,
     get_semantic_table,
 )
-from util.mermaid import ObjectsTable, SemanticNetwork
+from util.type import ObjectsTable, SemanticNetwork
 
 
 def main() -> None:
-
     objects_table: ObjectsTable = get_objects_table()
 
     semantic_network: SemanticNetwork = get_semantic_table()

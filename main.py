@@ -28,8 +28,8 @@ def semantic_network(request: Request):
 
 
 @app.get("/", response_class=RedirectResponse)
-async def root(_request: Request):
-    return templates.TemplateResponse(request=_request, name="views/index.html")
+async def root(request: Request):
+    return templates.TemplateResponse(request=request, name="views/index.html")
 
 
 if __name__ == "__main__":

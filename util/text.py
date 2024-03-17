@@ -25,7 +25,7 @@ def divide_text(sentence: str) -> tuple[list[TextInfo], list[TextInfo], list[Tex
             lambda text: (re.sub(r"[\(\)]", "", text), "O"),
             re.findall(
                 r"\(.*?\)",
-                coincidences.group("grupo3") + sentence[coincidences.end() :],
+                coincidences.group("grupo3") + sentence[coincidences.end():],
             ),
         )
     )
